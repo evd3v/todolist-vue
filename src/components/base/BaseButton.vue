@@ -66,7 +66,7 @@ export default {
     opacity: 0.4
 
   &[data-variant="primary"]
-    background-color: var(--dark-grayish-blue)
+    background-color: var(--main-blue)
 
   &[data-variant="error"]
     background-color: var(--vivid-orange)

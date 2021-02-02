@@ -1,5 +1,5 @@
 <template lang="pug">
-  .preloader
+  .dots-preloader
     .dots
       .dot(v-for="dot in 3" :key='dot')
 </template>
@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.preloader
+.dots-preloader
   display: flex
   justify-content: center
   align-items: center
