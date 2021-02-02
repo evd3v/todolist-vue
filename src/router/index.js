@@ -8,7 +8,21 @@ const routes = [
     path: '/',
     name: 'Main',
     component: () => import('@/views/Main')
-  }
+  },
+  {
+    path: '/tasks',
+    name: 'Tasks',
+    redirect: '/',
+    component: () => import('@/components/PathThrough'),
+    children: [
+      {
+        path: 'new',
+        name: 'NewTask',
+        component: () => import('@/views/tasks/NewTask')
+      }
+    ]
+  },
+  { path: '*', redirect: '/' }
 ]
 
 const router = new VueRouter({

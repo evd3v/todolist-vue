@@ -48,7 +48,7 @@ export default {
   &:hover
     cursor: pointer
     opacity: 0.8
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
+    box-shadow: 0 7px 14px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22)
 
   &[data-status="to-do"]
     background-color: var(--soft-blue)
