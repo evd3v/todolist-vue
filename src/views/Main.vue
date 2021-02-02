@@ -4,29 +4,26 @@
       | Список дел
     base-button(label="Добавить задачу" variant="primary")
     .main-page-todos(v-if='!loading')
-      todo-card
-      todo-card
-      todo-card
-      todo-card
+      task-card(v-for='task in tasks' :key='task.id' :task='task')
     circular-preloader(v-else)
 </template>
 
 <script>
-import TodoCard from '@/components/TodoCard'
+import TaskCard from '@/components/TaskCard'
 import BaseButton from '@/components/base/BaseButton'
 import { tasksRequest } from '@/api'
 import CircularPreloader from '@/components/base/CircularPreloader'
 export default {
   name: 'MainPage',
-  components: { CircularPreloader, BaseButton, TodoCard },
+  components: { CircularPreloader, BaseButton, TaskCard },
   data() {
     return {
       loading: true,
-      todos: []
+      tasks: []
     }
   },
   async mounted() {
-    this.todos = await tasksRequest
+    this.tasks = await tasksRequest
       .listTasks()
       .finally(() => (this.loading = false))
   }
@@ -40,7 +37,9 @@ export default {
   align-items: center
   &-todos
     margin: 30px auto
-    max-width: 500px
+    width: 100%
+    @media (min-width: 576px)
+      max-width: 500px
 
 ::v-deep.circular-preloader
   margin-top: 50px

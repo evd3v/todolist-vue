@@ -57,6 +57,17 @@ export default {
   align-items: center
   justify-content: center
   white-space: nowrap
+  transition: all ease-in-out .2s
+
+  &:hover
+    cursor: pointer
+    opacity: 0.8
+
+  &:focus
+    outline: none
+
+  &:active
+    transform: scale(1.05)
 
   .loading
     display: none
