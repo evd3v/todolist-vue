@@ -9,6 +9,10 @@ export const getTaskStatusById = (id) => {
   return taskStatuses.find((status) => status.id === id)
 }
 
+/**
+ * Return current date in needed format
+ * @return {string}
+ */
 export const createFormattedTaskDate = () => {
   const date = new Date().toISOString().split('T')
 

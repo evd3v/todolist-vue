@@ -1,29 +1,19 @@
-<template>
-  <div class="base-select-dropdown" :data-open="state">
-    <label v-if="label">{{ label }}</label>
-    <button
-      ref="toggle"
-      class="base-select-dropdown-toggle"
-      @click="toggleMenu"
-    >
-      <template v-if="selected">
-        <span>
-          {{ selected[titleKey] }}
-        </span>
-      </template>
-      <ChevronBottom />
-    </button>
-    <div class="base-select-dropdown-list custom-scrollbar">
-      <div
+<template lang="pug">
+  .base-select-dropdown(:data-open='state')
+    label(v-if="label")
+      | {{ label }}
+    button(ref='toggle' class="base-select-dropdown-toggle" @click='toggleMenu')
+      template(v-if="selected")
+        span
+          | {{ selected[titleKey] }}
+      chevron-bottom
+    .base-select-dropdown-list(class="custom-scrollbar")
+      .base-select-dropdown-list-item(
         v-for="(item, index) in items"
-        :key="index"
-        class="base-select-dropdown-list-item"
+        :key='index'
         @click="() => selectItem(item)"
-      >
-        {{ item[titleKey] }}
-      </div>
-    </div>
-  </div>
+        )
+          | {{ item[titleKey] }}
 </template>
 
 <script>
