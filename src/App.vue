@@ -1,4 +1,5 @@
 <template lang="pug">
   #app
-    router-view
+    .container
+      router-view
 </template>
