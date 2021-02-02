@@ -1,5 +1,7 @@
 <template lang="pug">
   .main-page
+    .title
+      | Список дел
 </template>
 
 <script>
