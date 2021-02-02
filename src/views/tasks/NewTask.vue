@@ -29,23 +29,24 @@ export default {
   },
   computed: {
     valid() {
-      console.log(createFormattedTaskDate())
       return this.title && this.description
     }
   },
   methods: {
     async createTask() {
-      this.loading = true
-      const id = await tasksRequest
-        .createTask({
-          title: this.title,
-          description: this.description,
-          status: 1,
-          created_date: createFormattedTaskDate()
-        })
-        .finally(() => (this.loading = false))
+      if (this.valid) {
+        this.loading = true
+        const id = await tasksRequest
+          .createTask({
+            title: this.title,
+            description: this.description,
+            status: 1,
+            created_date: createFormattedTaskDate()
+          })
+          .finally(() => (this.loading = false))
 
-      await this.$router.replace(`/tasks/${id}`)
+        await this.$router.replace(`/tasks/${id}`)
+      }
     }
   }
 }

@@ -1,24 +1,19 @@
-# todolist-vue
+# Basic todolist on VueJS
 
-## Project setup
+## Description
+In the project used json-server. All data you can find in ```db.json``` file
+
+## Project setup (for testing)
 ```
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
 npm run serve
 ```
 
-### Compiles and minifies for production
+Also, you need to run json-server
+
 ```
-npm run build
+json-server --watch db.json --delay 1000
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Delay key is used for adding delay to each request to json-server. 
+It needs for demonstration preloading components.

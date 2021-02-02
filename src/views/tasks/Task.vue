@@ -13,7 +13,7 @@
         .task-page-form-field
           span(class="task-page-form-field-text")
             | Дата создания: {{ task.created_date }}
-        base-button(label='Обновить' @click='onUpdate' :disabled='!haveUpdates || loading' :loading='updating')
+        base-button(label='Обновить' @click='onUpdate' :disabled='!haveUpdates || loading || !valid' :loading='updating')
         base-button(label='Удалить' @click='onDelete' variant="error" :disabled="loading" :loading='deleting')
     template(v-else)
       circular-preloader
@@ -52,6 +52,9 @@ export default {
     haveUpdates() {
       return !isEqual(this.task, this.copyTask)
     },
+    valid() {
+      return this.task.title && this.task.description
+    },
     loading() {
       return this.deleting || this.updating
     }
@@ -60,7 +63,7 @@ export default {
     const id = Number(this.$route.params.id)
     try {
       const task = await tasksRequest.getTaskById({ id })
-      this.task = { ...task, status: getTaskStatusById(task.id) }
+      this.task = { ...task, status: getTaskStatusById(task.status) }
       this.copyTask = { ...this.task }
     } catch (e) {
       await this.$router.replace('/error')
@@ -68,19 +71,21 @@ export default {
   },
   methods: {
     async onUpdate() {
-      this.updating = true
-      await tasksRequest
-        .updateTask({
-          id: this.task.id,
-          updatedFields: {
-            title: this.task.title,
-            description: this.task.description,
-            status: this.task.status.id
-          }
-        })
-        .finally(() => (this.updating = false))
+      if (this.valid) {
+        this.updating = true
+        await tasksRequest
+          .updateTask({
+            id: this.task.id,
+            updatedFields: {
+              title: this.task.title,
+              description: this.task.description,
+              status: this.task.status.id
+            }
+          })
+          .finally(() => (this.updating = false))
 
-      await this.$router.replace('/')
+        await this.$router.replace('/')
+      }
     },
     async onDelete() {
       this.deleting = true
