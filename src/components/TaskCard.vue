@@ -1,5 +1,5 @@
 <template lang="pug">
-  .task-card(:data-status='status.title')
+  router-link(class="task-card" tag="div" :data-status='status.title' :to='`/tasks/${task.id}`')
     .task-card-title
       | {{ task.title }}
     .task-card-description

@@ -19,10 +19,20 @@ const routes = [
         path: 'new',
         name: 'NewTask',
         component: () => import('@/views/tasks/NewTask')
+      },
+      {
+        path: ':id',
+        name: 'Task',
+        component: () => import('@/views/tasks/Task')
       }
     ]
   },
-  { path: '*', redirect: '/' }
+  {
+    path: '/error',
+    name: 'error',
+    component: () => import('@/views/PageNotFound')
+  },
+  { path: '*', component: () => import('@/views/PageNotFound') }
 ]
 
 const router = new VueRouter({
